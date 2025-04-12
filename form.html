@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact form for Visit My Country - Brazil" />
+  <title>Contact Us - Visit My Country</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+</body>
+</head>
+<body>
+  <header>
+    <h1>Contact</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="rio.html">Rio</a></li>
+        <li><a href="amazon.html">Amazon</a></li>
+        <li><a href="iguazu.html">Iguaçu Falls</a></li>
+        <li><a href="salvador.html">Salvador</a></li>
+        <li><a href="form.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or need more information about Brazil, feel free to contact me!</p>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          <div id="nameError" class="error-message"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <div id="emailError" class="error-message"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea>
+          <div id="messageError" class="error-message"></div>
+        </div>
+      
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+
+    <div id="successMessage" class="success-message" style="display:none;">
+        <p>Successfully Submitted! Thank you for your message.</p>
+    </div>
+    
+    <!-- JavaScript code inside script tag -->
+    <script>
+      // Wait until the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function() {
+    
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+    
+          const name = document.getElementById('name');
+          const email = document.getElementById('email');
+          const message = document.getElementById('message');
+    
+          const errorName = document.getElementById('nameError');
+          const errorEmail = document.getElementById('emailError');
+          const errorMessage = document.getElementById('messageError');
+    
+          let valid = true;
+    
+          // Clear previous errors
+          errorName.textContent = '';
+          errorEmail.textContent = '';
+          errorMessage.textContent = '';
+    
+          // Validate Name
+          if (name.value.trim() === '') {
+            errorName.textContent = 'Name is required.';
+            valid = false;
+          }
+    
+          // Validate Email
+          if (email.value.trim() === '') {
+            errorEmail.textContent = 'Email is required.';
+            valid = false;
+          } else if (!validateEmail(email.value)) {
+            errorEmail.textContent = 'Please enter a valid email address.';
+            valid = false;
+          }
+    
+          // Validate Message
+          if (message.value.trim() === '') {
+            errorMessage.textContent = 'Message is required.';
+            valid = false;
+          }
+    
+          // If valid, display success message and reset the form
+          if (valid) {
+            form.reset(); // Reset form fields
+            successMessage.style.display = 'block'; // Show success message
+          }
+        });
+    
+        // Email validation function
+        function validateEmail(email) {
+          const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+          return regex.test(email);
+        }
+      });
+    </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Jhonttan Rabello. All rights reserved.</p>  </footer>
+</body>
+</html>
